@@ -10,10 +10,16 @@
         state: present
         update_cache: yes
 
-    - name: Copy HTML files to the web server directory
+    - name: Clone the DevOps-course repository
+      ansible.builtin.git:
+        repo: 'https://github.com/mateja81/DevOps-course.git'
+        dest: /tmp/DevOps-course
+        version: main
+
+    - name: Copy HTML file to the web server directory
       copy:
-        src: /home/vagrant/html_files/
-        dest: /var/www/html/
+        src: /tmp/DevOps-course/index.html
+        dest: /var/www/html/index.html
 
     - name: Start and enable Nginx service
       service:
