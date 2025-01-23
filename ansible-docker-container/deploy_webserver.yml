@@ -1,34 +1,24 @@
 ---
-- name: Deploy Docker Web Server
+- name: Deploy Docker Web Server and Ensure Webpage Updates
   hosts: localhost
   tasks:
-    - name: Install Docker (if not installed)
-      ansible.builtin.apt:
-        name: docker.io
-        state: present
-        update_cache: yes
-
     - name: Pull Nginx Docker Image
       community.docker.docker_image:
         name: nginx
         source: pull
 
-    - name: Run Nginx container with bind mount
+    - name: Run Nginx container with bind mount for HTML directory
       community.docker.docker_container:
         name: nginx_webserver
         image: nginx
         state: started
         ports:
-          - "80:80"
+          - "8080:80"
         volumes:
-          - "/home/vagrant/sample:/usr/share/nginx/html"
+          - "/home/vagrant/html:/usr/share/nginx/html"
 
     - name: Ensure the container is running
       community.docker.docker_container_info:
         name: nginx_webserver
       register: container_info
-
-    - name: Display container information
-      debug:
-        var: container_info
 
