@@ -1,4 +1,3 @@
-# wordpress-app/base/deployment.yaml
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -20,10 +19,10 @@ spec:
         - containerPort: 80
         env:
         - name: WORDPRESS_DATABASE_HOST
-          value: "mariadb"  # MariaDB Service name
+          value: "mariadb"
         - name: WORDPRESS_DATABASE_USER
-          value: "wordpress"            # Database username
+          value: "wordpress"
         - name: WORDPRESS_DATABASE_PASSWORD
-          value: "wordpresspassword"    # Database password
+          value: "wordpresspassword"
         - name: WORDPRESS_DATABASE_NAME
-          value: "wordpress"            # Database name
+          value: "wordpress"
