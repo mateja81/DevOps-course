@@ -1,0 +1,8 @@
+auth:
+  rootPassword: "rootpassword"
+  database: "wordpress"
+  username: "wordpress"
+  password: "wordpresspassword"
+persistence:
+  enabled: true
+  size: 8Gi

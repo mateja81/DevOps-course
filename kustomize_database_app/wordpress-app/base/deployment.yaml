@@ -1,0 +1,29 @@
+# wordpress-app/base/deployment.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: wordpress
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: wordpress
+  template:
+    metadata:
+      labels:
+        app: wordpress
+    spec:
+      containers:
+      - name: wordpress
+        image: bitnami/wordpress:latest
+        ports:
+        - containerPort: 80
+        env:
+        - name: WORDPRESS_DATABASE_HOST
+          value: "mariadb"  # MariaDB Service name
+        - name: WORDPRESS_DATABASE_USER
+          value: "wordpress"            # Database username
+        - name: WORDPRESS_DATABASE_PASSWORD
+          value: "wordpresspassword"    # Database password
+        - name: WORDPRESS_DATABASE_NAME
+          value: "wordpress"            # Database name
